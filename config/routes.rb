@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   post "/sessions" => "sessions#create"
   post "/courts" => "courts#create"
   get "/courts" => "courts#index"
+  get "/courts/:id" => "courts#show"
+  patch "/courts/:id" => "courts#update"
+  delete "/courts/:id" => "courts#destroy"
+  get "/mycourts" => "courts#userindex"
 end
