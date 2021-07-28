@@ -7,8 +7,12 @@ class CourtsController < ApplicationController
   end
 
   def userindex
-    courts = current_user.courts
-    render json: courts
+    if current_user
+      courts = current_user.courts
+      render json: courts
+    else
+      render json: { messages: "log in to see your courts" }
+    end
   end
 
   def show
@@ -34,8 +38,7 @@ class CourtsController < ApplicationController
   end
 
   def update
-    court_id = params["id"]
-    court = Court.find(court_id)
+    court = current_user.courts.find_by(id: params[:id])
 
     court.name = params["name"] || court.name
     court.facility = params["facility"] || court.facility
@@ -51,8 +54,7 @@ class CourtsController < ApplicationController
   end
 
   def destroy
-    court_id = params["id"]
-    court = Court.find(court_id)
+    court = current_user.courts.find_by(id: params[:id])
     court.destroy
     render json: { message: "Court Deleted" }
   end
