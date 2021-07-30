@@ -7,12 +7,8 @@ class CourtsController < ApplicationController
   end
 
   def userindex
-    if current_user
-      courts = current_user.courts
-      render json: courts
-    else
-      render json: { messages: "log in to see your courts" }
-    end
+    courts = current_user.courts
+    render json: courts
   end
 
   def show
@@ -49,7 +45,7 @@ class CourtsController < ApplicationController
     if court.save
       render json: court
     else
-      render json: { errors: court.erros.full_messages }
+      render json: { errors: court.errors.full_messages }
     end
   end
 
