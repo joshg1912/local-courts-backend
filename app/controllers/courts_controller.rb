@@ -24,6 +24,7 @@ class CourtsController < ApplicationController
       fees: params["fees"],
       lights: params["lights"],
       address: params["address"],
+      zipcode: params["zipcode"],
       user_id: current_user.id,
     )
     if court.save
@@ -41,6 +42,7 @@ class CourtsController < ApplicationController
     court.fees = params["fees"] || court.fees
     court.lights = params["lights"] || court.lights
     court.address = params["address"] || court.address
+    court.zipcode = params["zipcode"] || court.zipcode
 
     if court.save
       render json: court
